@@ -1,73 +1,89 @@
-README
-Project Overview
-This project utilizes Langchain and Qdrant to build a semantic search engine. It allows users to query a database of documents and retrieve relevant results based on semantic similarity.
-Prerequisites
+# Semantic Search Engine with Langchain and Qdrant
 
-    Docker installed on your system
-    Python 3.8 or higher
+## Project Overview
 
-Setup
+This project leverages **Langchain** and **Qdrant** to create a powerful semantic search engine. The system enables users to query a vectorized database of documents and retrieve the most relevant results based on semantic similarity, providing more contextually accurate results compared to traditional keyword-based searches.
 
-    Install Docker: Download and install Docker from 
+## Prerequisites
 
-.
-Pull Qdrant Image: Run the following command to pull the Qdrant image:
+- **Docker** installed on your system
+- **Python** (version 3.8 or higher)
 
-docker pull qdrant/qdrant
+## Setup Instructions
 
-3. **Run Qdrant Container**: Run the Qdrant container on port 6333:
+1. **Install Docker**:  
+   [Download and install Docker](https://www.docker.com/get-started) on your system.
 
-docker run -p 6333:6333 qdrant/qdrant
-
-4. **Clone this repository**: Clone this project using Git:
-
-git clone 
-
-5. **Install dependencies**: Navigate to the project directory and install dependencies:
-
-pip install -r requirements.txt
-
-
-**Usage**
-
-1. **Prepare documents**: Place your PDF documents in the `data` directory.
-2. **Index documents**: Run `ingrst.py` to index the documents:
+2. **Pull the Qdrant Image**:  
+   Run the following command to pull the Qdrant Docker image:
    ```bash
-python ingrst.py
+   docker pull qdrant/qdrant
+   ```
 
-This will create a Qdrant collection named "vector_db".
+3. **Run the Qdrant Container**:  
+   Start the Qdrant container by running:
+   ```bash
+   docker run -p 6333:6333 qdrant/qdrant
+   ```
 
-    Run the search engine: Run app.py using Streamlit:
-    Bash
+4. **Clone the Repository**:  
+   Clone this project’s repository:
+   ```bash
+   git clone <repository_url>
+   ```
 
-streamlit run app.py
+5. **Install Project Dependencies**:  
+   Navigate to the project directory and install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-   This will start a web interface where you can input queries.
-4. **Query the database**: Enter a query in the text box and press Enter. The top 5 most similar documents will be displayed.
+## Usage
 
-**Explanation**
+1. **Prepare Documents**:  
+   Place your PDF documents in the `data` directory.
 
-This project consists of two main scripts:
+2. **Index Documents**:  
+   Run the following command to index the documents:
+   ```bash
+   python ingest.py
+   ```
+   This will create a Qdrant collection named `vector_db`, which stores the document embeddings for semantic search.
 
-1. **ingrst.py**: This script indexes the PDF documents using Langchain's `PyPDFLoader` and `RecursiveCharacterTextSplitter`. It then embeds the text chunks using Hugging Face's `BAAI/bge-large-en` model and stores them in a Qdrant collection.
-2. **app.py**: This script uses Streamlit to create a web interface for querying the Qdrant collection. It takes user input, embeds the query using the same model, and performs a similarity search on the Qdrant collection.
+3. **Run the Search Engine**:  
+   Use **Streamlit** to launch the web interface for the search engine:
+   ```bash
+   streamlit run app.py
+   ```
 
-**Dependencies**
+4. **Query the Database**:  
+   Input a query in the web interface, and the system will retrieve the top 5 most semantically similar documents.
 
-This project relies on the following libraries:
+## Project Components
 
-* Langchain: For text processing and embedding
-* Qdrant: For vector database management
-* Hugging Face Transformers: For embedding models
-* Streamlit: For web interface
-* PyPDF2: For PDF document loading
+- **ingest.py**:  
+  This script processes and indexes your PDF documents. It uses **PyPDFLoader** and **RecursiveCharacterTextSplitter** from Langchain to split the documents into manageable chunks. These text chunks are embedded using the Hugging Face model `BAAI/bge-large-en` and stored in the Qdrant collection.
 
-**Troubleshooting**
+- **app.py**:  
+  This script provides a user interface for querying the database using **Streamlit**. It takes user input, embeds the query using the same model, and performs a similarity search on the stored embeddings in Qdrant.
 
-* Ensure Docker is running and Qdrant container is started before running `ingrst.py` or `app.py`.
-* Check the Qdrant collection name and URL in `ingrst.py` and `app.py` match the actual collection name and URL.
-* Adjust the `chunk_size` and `chunk_overlap` parameters in `ingrst.py` to optimize indexing performance.
+## Key Libraries
 
-**Contributing**
+- **Langchain**: For document processing and embedding text
+- **Qdrant**: For vector database management
+- **Hugging Face Transformers**: For pre-trained language models
+- **Streamlit**: For building the web interface
+- **PyPDFLoader**: For loading and processing PDF documents
 
-Contributions are welcome! Please submit a pull request with your changes.
+## Troubleshooting
+
+- Ensure Docker is running, and the Qdrant container is started before running `ingest.py` or `app.py`.
+- Verify that the collection name (`vector_db`) and URL (http://localhost:6333) in both scripts match.
+- Adjust the `chunk_size` and `chunk_overlap` in `ingest.py` for optimal indexing performance.
+
+## Contributing
+
+Contributions are welcome! If you have suggestions or improvements, feel free to submit a pull request.
+```
+
+You can copy this directly into your `README.md` file in GitHub's editor. Let me know if you need any further modifications!
