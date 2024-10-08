@@ -23,7 +23,7 @@ This project leverages **Langchain** and **Qdrant** to create a powerful semanti
 3. **Run the Qdrant Container**:  
    Start the Qdrant container by running:
    ```bash
-   docker run -p 6333:6333 qdrant/qdrant
+   docker run -p 6333:6333 qdrant/storage qdrant/qdrant
    ```
 
 4. **Clone the Repository**:  
